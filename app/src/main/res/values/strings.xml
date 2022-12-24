@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Weather App</string>
+    <string name="location">Location</string>
+    <string name="updated_at">Updated at</string>
+    <string name="clear_sky">Clear Sky</string>
+    <string name="_24_c">24°C</string>
+    <string name="min_temp">Min Temp</string>
+    <string name="max_temp">Max Temp</string>
+    <string name="todo">TODO</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="please_enter_your_city">Please Enter your City</string>
+    <string name="search">Search</string>
+    <string name="logs">Logs</string>
+    <string name="humidity">Humidity</string>
+    <string name="pressure">Pressure</string>
+    <string name="wind">Wind</string>
+    <string name="feels_like">Feels Like</string>
+    <string name="something_went_wrong">something went wrong</string>
+    <string name="temperature">Temperature</string>
+    <string name="check_on">Checked On</string>
+    <string name="no_logs">No Logs</string>
+    <string name="search_city_to_get_weather">Search city to get weather</string>
+</resources>
