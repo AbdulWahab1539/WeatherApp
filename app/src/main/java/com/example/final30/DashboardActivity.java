@@ -16,8 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.final30.models.Logs;
-import com.example.final30.models.WeatherData;
+import com.example.final30.models.openweather.Logs;
+import com.example.final30.models.openweather.WeatherData;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.installations.FirebaseInstallations;
@@ -31,7 +31,7 @@ import retrofit2.Response;
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText etCity;
-    Button btnSearch;
+    Button btnSearch, btnRoute;
     String city = "abbottabad";
     ApiCalls apiCalls;
     TextView tvTemp, tvLocation, tvMinTemp, tvMaxTemp, tvPressure,
@@ -50,6 +50,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
 
         etCity = findViewById(R.id.et_city);
         btnSearch = findViewById(R.id.btn_search);
+        btnRoute = findViewById(R.id.btn_route);
+        btnRoute.setOnClickListener(this);
         btnSearch.setOnClickListener(this);
 
         tvTemp = findViewById(R.id.temp);
@@ -95,6 +97,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
             getWeatherData(etCity.getText().toString());
         } else if (id == R.id.btn_logs)
             startActivity(new Intent(this, LogsActivity.class));
+        else if (id == R.id.btn_route)
+            startActivity(new Intent(this, RouteActivity.class));
     }
 
     void getWeatherData(String city) {

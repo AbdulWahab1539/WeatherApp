@@ -21,4 +21,259 @@
     <string name="check_on">Checked On</string>
     <string name="no_logs">No Logs</string>
     <string name="search_city_to_get_weather">Search city to get weather</string>
+    <string name="rpute">Route</string>
+    <string name="destination">Destination</string>
+    <string name="origin">Origin</string>
+    <string name="route_weather">Route Weather</string>
+
+    <string-array name="pakistan_cities">
+        <item>Abbottabad</item>
+        <item>Adda Jahan Khan</item>
+        <item>Ahmedpur East</item>
+        <item>Ahmadpur Sial</item>
+        <item>Akhora Khattak</item>
+        <item>Ali Chak</item>
+        <item>Alipur</item>
+        <item>Arifwala</item>
+        <item>Attock City</item>
+        <item>Baddomalhi</item>
+        <item>Badin</item>
+        <item>Bahawalnagar</item>
+        <item>Bahawalpur</item>
+        <item>Bajaur</item>
+        <item>Banda Daud Shah</item>
+        <item>Bandhi</item>
+        <item>Bannu</item>
+        <item>Basirpur</item>
+        <item>Bat Khela</item>
+        <item>Battagram</item>
+        <item>Begowala</item>
+        <item>Bela</item>
+        <item>Berani</item>
+        <item>Bhag</item>
+        <item>Bhalwal</item>
+        <item>Bhawana</item>
+        <item>Bhera</item>
+        <item>Bhimber</item>
+        <item>Bhiria</item>
+        <item>Bhuawana</item>
+        <item>Burewala</item>
+        <item>Chak Azam Sahu</item>
+        <item>Chak Jhumra</item>
+        <item>Chak One Hundred Twenty Nine Left</item>
+        <item>Chak Thirty-one -Eleven Left</item>
+        <item>Chakwal</item>
+        <item>Chaman</item>
+        <item>Charsadda</item>
+        <item>Chawinda</item>
+        <item>Chenab Nagar</item>
+        <item>Chichawatni</item>
+        <item>Chillianwala</item>
+        <item>Choa Saidan Shah</item>
+        <item>Chuhar Kana</item>
+        <item>Chunian</item>
+        <item>Dadhar</item>
+        <item>Dadu</item>
+        <item>Daira Din Panah</item>
+        <item>Dajal</item>
+        <item>Dalbandin</item>
+        <item>Daromehar</item>
+        <item>Darya Khan</item>
+        <item>Daska</item>
+        <item>Daud Khel</item>
+        <item>Dera Bugti</item>
+        <item>Dera Ghazi Khan</item>
+        <item>Dera Ismail Khan</item>
+        <item>Dhana Sar</item>
+        <item>Digri</item>
+        <item>Dijkot</item>
+        <item>Faisalabad</item>
+        <item>Fateh Jang</item>
+        <item>Gadar</item>
+        <item>Gahkuch</item>
+        <item>Gambat</item>
+        <item>Garhi Khairo</item>
+        <item>Garhi Yasin</item>
+        <item>Gawadar</item>
+        <item>Ghauspur</item>
+        <item>Ghazluna</item>
+        <item>Ghotki</item>
+        <item>Gilgit</item>
+        <item>Gojra</item>
+        <item>Gwadar</item>
+        <item>Hafizabad</item>
+        <item>Hala</item>
+        <item>Haripur</item>
+        <item>Haroonabad</item>
+        <item>Hasilpur</item>
+        <item>Havelian</item>
+        <item>Hazro</item>
+        <item>Hyderabad</item>
+        <item>Islamabad</item>
+        <item>Jacobabad</item>
+        <item>Jalalpur Jattan</item>
+        <item>Jalalpur Pirwala</item>
+        <item>Jampur</item>
+        <item>Jamshoro</item>
+        <item>Jaranwala</item>
+        <item>Jatoi</item>
+        <item>Jauharabad</item>
+        <item>Jhang</item>
+        <item>Jhelum</item>
+        <item>Jiwani</item>
+        <item>Kabirwala</item>
+        <item>Kadi</item>
+        <item>Kahna Nau</item>
+        <item>Kahuta</item>
+        <item>Kalabagh</item>
+        <item>Kalat</item>
+        <item>Kandhkot</item>
+        <item>Karachi</item>
+        <item>Karak</item>
+        <item>Karor Lal Esan</item>
+        <item>Kashmore</item>
+        <item>Kasur</item>
+        <item>Khairpur</item>
+        <item>Khairpur Nathan Shah</item>
+        <item>Khanewal</item>
+        <item>Khanpur</item>
+        <item>Kharian</item>
+        <item>Khewra</item>
+        <item>Khurianwala</item>
+        <item>Khushab</item>
+        <item>Khyber</item>
+        <item>Kohat</item>
+        <item>Kot Addu</item>
+        <item>Kot Diji</item>
+        <item>Kot Malik</item>
+        <item>Kot Mumin</item>
+        <item>Kot Radha Kishan</item>
+        <item>Kot Samaba</item>
+        <item>Kotli</item>
+        <item>Kundian</item>
+        <item>Kunri</item>
+        <item>Lahore</item>
+        <item>Lala Musa</item>
+        <item>Larkana</item>
+        <item>Layyah</item>
+        <item>Lodhran</item>
+        <item>Loralai</item>
+        <item>Mach</item>
+        <item>Madeji</item>
+        <item>Mailsi</item>
+        <item>Malakand</item>
+        <item>Mamoori</item>
+        <item>Mandi Bahauddin</item>
+        <item>Mansehra</item>
+        <item>Mardan</item>
+        <item>Mastung</item>
+        <item>Matiari</item>
+        <item>Mian Channu</item>
+        <item>Mianwali</item>
+        <item>Mingora</item>
+        <item>Mirpur</item>
+        <item>Mirpur Khas</item>
+        <item>Mithi</item>
+        <item>Moro</item>
+        <item>Multan</item>
+        <item>Muridke</item>
+        <item>Murree</item>
+        <item>Musa Khel Bazar</item>
+        <item>Muzaffarabad</item>
+        <item>Muzaffargarh</item>
+        <item>Nankana Sahib</item>
+        <item>Narowal</item>
+        <item>Nasirabad</item>
+        <item>Naushahro Firoz</item>
+        <item>Nawabshah</item>
+        <item>Nilore</item>
+        <item>Nowshera</item>
+        <item>Okara</item>
+        <item>Pakpattan</item>
+        <item>Pano Aqil</item>
+        <item>Parachinar</item>
+        <item>Pasni</item>
+        <item>Pattoki</item>
+        <item>Peshawar</item>
+        <item>Phalia</item>
+        <item>Pind Dadan Khan</item>
+        <item>Pindi Bhattian</item>
+        <item>Pir Mahal</item>
+        <item>Quetta</item>
+        <item>Rabwah</item>
+        <item>Rahim Yar Khan</item>
+        <item>Raiwind</item>
+        <item>Rajanpur</item>
+        <item>Ranipur</item>
+        <item>Rawalakot</item>
+        <item>Rawalpindi</item>
+        <item>Renala Khurd</item>
+        <item>Risalpur Cantonment</item>
+        <item>Rohri</item>
+        <item>Sadiqabad</item>
+        <item>Safdarabad</item>
+        <item>Sahiwal</item>
+        <item>Saidu Sharif</item>
+        <item>Sakrand</item>
+        <item>Sambrial</item>
+        <item>Sanghar</item>
+        <item>Sarai Alamgir</item>
+        <item>Sarai Naurang</item>
+        <item>Sarai Sidhu</item>
+        <item>Sargodha</item>
+        <item>Shahdadkot</item>
+        <item>Shahkot</item>
+        <item>Shakargarh</item>
+        <item>Sharqpur Sharif</item>
+        <item>Shikarpur</item>
+        <item>Shujaabad</item>
+        <item>Sialkot</item>
+        <item>Sibi</item>
+        <item>Skardu</item>
+        <item>Sohawa</item>
+        <item>Sukkur</item>
+        <item>Swabi</item>
+        <item>Swat</item>
+        <item>Tandlianwala</item>
+        <item>Tank</item>
+        <item>Taunsa Sharif</item>
+        <item>Taxila</item>
+        <item>Thal</item>
+        <item>Tharparkar</item>
+        <item>Thatta</item>
+        <item>Toba Tek Singh</item>
+        <item>Topi</item>
+        <item>Turbat</item>
+        <item>Ubaro</item>
+        <item>Uch Sharif</item>
+        <item>Umarkot</item>
+        <item>Upper Dir</item>
+        <item>Uthal</item>
+        <item>Vehari</item>
+        <item>Wah Cantonment</item>
+        <item>Warah</item>
+        <item>Warburton</item>
+        <item>Wazirabad</item>
+        <item>Yazman</item>
+        <item>Zafarwal</item>
+    </string-array>
+
+    <string-array name="weather_conditions">
+        <item>Clouds</item>
+        <item>Clear</item>
+        <item>Thunderstorm</item>
+        <item>Rain</item>
+        <item>Snow</item>
+        <!--        <item>Drizzle</item>-->
+        <!--        <item>Mist</item>-->
+        <!--        <item>Smoke</item>-->
+        <!--        <item>Haze</item>-->
+        <!--        <item>Dust</item>-->
+        <!--        <item>Fog</item>-->
+        <!--        <item>Sand</item>-->
+        <!--        <item>Dust</item>-->
+        <!--        <item>Ash</item>-->
+        <!--        <item>Squall</item>-->
+        <!--        <item>Tornado</item>-->
+    </string-array>
 </resources>

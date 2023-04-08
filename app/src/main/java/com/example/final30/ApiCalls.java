@@ -1,10 +1,9 @@
 package com.example.final30;
 
-import com.example.final30.models.WeatherData;
+import com.example.final30.models.openweather.WeatherData;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiCalls {

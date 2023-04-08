@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.final30.models.Logs;
+import com.example.final30.models.openweather.Logs;
 
 import java.util.List;
 

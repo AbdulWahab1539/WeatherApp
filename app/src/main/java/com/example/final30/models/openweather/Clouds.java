@@ -1,4 +1,4 @@
-package com.example.final30.models;
+package com.example.final30.models.openweather;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -1,4 +1,4 @@
-package com.example.final30.models;
+package com.example.final30.models.openweather;
 
 public class Logs {
     String temp;
