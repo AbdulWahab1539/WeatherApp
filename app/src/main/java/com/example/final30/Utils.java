@@ -10,19 +10,14 @@ import android.net.NetworkInfo;
 import android.util.Log;
 import android.view.Window;
 
-import com.google.android.material.dialog.InsetDialogOnTouchListener;
-
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 public class Utils {
-    static  String TAG = "myta";
+    static String TAG = "myta";
 
     public static Dialog getLoading(Context context) {
         Log.i(TAG, "getLoading: ");
@@ -70,4 +65,35 @@ public class Utils {
         alert.show();
     }
 
+    public static int getAnimAccordingToStatus(String status) {
+        int anim;
+        switch (status.toLowerCase()) {
+            case "clouds":
+                anim = R.raw.clouds;
+                break;
+            case "rain":
+            case "drizzle":
+                anim = R.raw.rain;
+                break;
+            case "storm":
+            case "thunderstorm":
+                anim = R.raw.storm;
+                break;
+            case "snow":
+                anim = R.raw.snow;
+                break;
+            case "mist":
+            case "smoke":
+                anim = R.raw.mist;
+                break;
+            case "haze":
+            case "fog":
+            case "foggy":
+                anim = R.raw.foggy;
+                break;
+            default:
+                anim = R.raw.clear;
+        }
+        return anim;
+    }
 }

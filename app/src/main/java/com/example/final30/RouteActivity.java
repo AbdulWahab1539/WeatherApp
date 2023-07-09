@@ -1,26 +1,26 @@
 package com.example.final30;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.final30.models.MapsApi;
+import com.example.final30.models.RouteData;
 import com.example.final30.models.maps.Route;
 import com.example.final30.models.maps.StepsItem;
 import com.example.final30.models.openweather.WeatherData;
@@ -29,7 +29,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -39,36 +39,43 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RouteActivity extends AppCompatActivity implements View.OnClickListener {
-    static String TAG = "mytag";
-    EditText etOrigin, etDestination;
+    static String TAG = "TAG";
+    AutoCompleteTextView etOrigin, etDestination;
     Button btnRoute;
     MapsApi mapsApi;
     ApiCalls apiCalls;
-    List<String> locations, statuses;
+    List<String> locations, statuses, temperatures;
     TextView textView, tvWeatherStatus;
     LottieAnimationView lottieAnimationView;
     String origin;
     String destination;
     String[] cities;
     String[] weatherConditions;
-
+    int index = 0;
     Dialog customDialog;
-
+    RecyclerView recyclerView;
+    RoutesAdapter routesAdapter;
+    List<RouteData> routeData;
+    private ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route);
 
+        recyclerView = findViewById(R.id.rvRouteCities);
+
         customDialog = Utils.getLoading(this);
 
-        etOrigin = findViewById(R.id.et_dest);
-        etDestination = findViewById(R.id.et_origin);
+        etOrigin = findViewById(R.id.et_origin);
+        etDestination = findViewById(R.id.et_dest);
         btnRoute = findViewById(R.id.btn_search);
         btnRoute.setOnClickListener(this);
 
         locations = new ArrayList<>();
         statuses = new ArrayList<>();
+        temperatures = new ArrayList<>();
+        routeData = new ArrayList<>();
 
         textView = findViewById(R.id.errortext);
 
@@ -80,6 +87,24 @@ public class RouteActivity extends AppCompatActivity implements View.OnClickList
 
         lottieAnimationView = findViewById(R.id.weather_anim);
         tvWeatherStatus = findViewById(R.id.tv_weather);
+
+        // Create an ArrayAdapter with the suggestions
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, cities);
+        // Set the adapter on the AutoCompleteTextView
+        etOrigin.setAdapter(adapter);
+        etDestination.setAdapter(adapter);
+
+        etOrigin.setOnItemClickListener((parent, view, position, id) -> {
+            String selectedSuggestion = adapter.getItem(position);
+            // Do something with the selected suggestion
+            origin = selectedSuggestion.trim();
+        });
+        etDestination.setOnItemClickListener((parent, view, position, id) -> {
+            String selectedSuggestion = adapter.getItem(position);
+            // Do something with the selected suggestion
+            destination = selectedSuggestion.trim();
+        });
+
     }
 
     @Override
@@ -90,6 +115,7 @@ public class RouteActivity extends AppCompatActivity implements View.OnClickList
                 Toast.makeText(this, "Please Enter Destination & Origin City to Search", Toast.LENGTH_SHORT).show();
                 return;
             }
+            Log.i(TAG, "onClick: " + etOrigin.getText().toString() + etDestination.getText().toString());
             getRouteWeather(etOrigin.getText().toString(), etDestination.getText().toString());
         }
     }
@@ -114,6 +140,9 @@ public class RouteActivity extends AppCompatActivity implements View.OnClickList
     private void getRouteWeather(String origin, String destination) {
         locations.clear();
         statuses.clear();
+        temperatures.clear();
+        routeData.clear();
+        index = 0;
         this.origin = origin.trim();
         this.destination = destination.trim();
 
@@ -127,7 +156,8 @@ public class RouteActivity extends AppCompatActivity implements View.OnClickList
         String destLatLng = getLocationFromAddress(this, destination.trim());
         Log.i(TAG, "getRouteWeather: " + origin + originLatLng + destination + "::" + destLatLng);
         if (destLatLng.isEmpty() || originLatLng.isEmpty()) {
-            Toast.makeText(this, "Check Your address try to refine your search more.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Check Your address try to refine your search more.",
+                    Toast.LENGTH_SHORT).show();
             return;
         }
         Call<Route> call = mapsApi.getRoute(originLatLng, destLatLng);
@@ -176,26 +206,36 @@ public class RouteActivity extends AppCompatActivity implements View.OnClickList
         for (StepsItem route : body.getRoutes().get(0).getLegs().get(0).getSteps()) {
             // Loop through the array and print each city name
             for (String city : cities) {
-                if (containsWord(route.getHtmlInstructions().toLowerCase(), city.toLowerCase()))
-//                if (route.getHtmlInstructions().toLowerCase().contains(city.toLowerCase())
-//                        && !city.equalsIgnoreCase(destination)
-//                        && !city.equalsIgnoreCase(origin))
-                {
+                if (containsWord(route.getHtmlInstructions().toLowerCase(), city.toLowerCase())
+                        && !route.getHtmlInstructions().toLowerCase().contains("motorway")
+                        && !route.getHtmlInstructions().toLowerCase().contains("rd")
+//                        && !containsWord(route.getHtmlInstructions().toLowerCase(), city.toLowerCase() + " rd")
+//                        && !containsWord(route.getHtmlInstructions().toLowerCase(), city.toLowerCase() + " motorway")
+                ) {
                     Log.i(TAG, "processCitiesInRoute: " + city);
                     locations.add(city);
-
                 }
             }
         }
 
         Log.i(TAG, "processCitiesInRoute: " + locations.size());
-        Set<String> set = new HashSet<>(locations);
+        Set<String> set = new LinkedHashSet<>(locations);
+        set.remove(origin.trim());
+        set.remove(destination.trim());
+        Log.i(TAG, "processCitiesInRoute: " + set);
         locations.clear();
         locations.addAll(set);
-        Log.i(TAG, "processCitiesInRoute: " + locations.size());
-        for (String location : locations) {
-            getWeatherData(location);
-        }
+        Log.i(TAG, "processCitiesInRoute: " + locations);
+        locations.add(0, origin.trim());
+        Log.i(TAG, "processCitiesInRoute: Origin Added" + locations);
+        locations.add(locations.size(), destination.trim());
+        Log.i(TAG, "processCitiesInRoute: Dest Added" + locations);
+//        for (String location : locations) {
+//            Log.i(TAG, "processCitiesInRoute: " + location + locations.size());
+//            getWeatherData(locations);
+//        }
+
+        getWeatherData(locations.get(index));
     }
 
     public static boolean containsWord(String text, String word) {
@@ -223,17 +263,26 @@ public class RouteActivity extends AppCompatActivity implements View.OnClickList
                         String code = jObjError.getString("cod");
                         Toast.makeText(RouteActivity.this, code + ": " + city + message,
                                 Toast.LENGTH_LONG).show();
-                        if (locations.size() != 0 && city.equals(locations.get(locations.size() - 1)))
-                            updateUI();
+                        updateUIOrProcessNextCity(city);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
                 if (response.body() == null | statusCode != 200) return;
-                Log.i(TAG, "onResponse: " + response.body().getWeather().get(0).getMain());
+                Log.i(TAG, "onResponse: " + response.body().getWeather().get(0).getMain() + city);
+                routeData.add(new RouteData(
+                                String.format("%s°C", Math.round(response.body().getMain().getTemp()))
+                                , city,
+                                response.body().getWeather().get(0).getMain(),
+                                String.format("Pressure %s Pa", response.body().getMain().getPressure()),
+                                String.format("Humidity %s%%", response.body().getMain().getHumidity()),
+                                String.format("Feels Like %s°C", Math.round(response.body().getMain().getFeelsLike())),
+                                String.format("%s Km/h", Math.round(response.body().getWind().getSpeed()))
+                        )
+                );
                 statuses.add(response.body().getWeather().get(0).getMain());
-                if (locations.size() != 0 && city.equals(locations.get(locations.size() - 1)))
-                    updateUI();
+                temperatures.add(String.format("%s°C", Math.round(response.body().getMain().getTemp())));
+                updateUIOrProcessNextCity(city);
             }
 
             @Override
@@ -244,6 +293,15 @@ public class RouteActivity extends AppCompatActivity implements View.OnClickList
                 lottieAnimationView.setVisibility(View.GONE);
             }
         });
+    }
+
+    private void updateUIOrProcessNextCity(String city) {
+        if (!locations.isEmpty() && city.equals(locations.get(locations.size() - 1)))
+            updateUI();
+        else if (!locations.isEmpty()) {
+            index++;
+            getWeatherData(locations.get(index));
+        }
     }
 
     private void updateUI() {
@@ -289,9 +347,22 @@ public class RouteActivity extends AppCompatActivity implements View.OnClickList
         lottieAnimationView.setAnimation(anim);
         lottieAnimationView.setVisibility(View.VISIBLE);
         lottieAnimationView.playAnimation();
-        lottieAnimationView.setRepeatCount(1000);
+        lottieAnimationView.setRepeatCount(999999);
         tvWeatherStatus.setText(finalStatus);
         tvWeatherStatus.setVisibility(View.VISIBLE);
+
+        displayAllCitiesWeather();
+    }
+
+    private void displayAllCitiesWeather() {
+        for (RouteData routesData :
+                routeData) {
+            Log.i(TAG, "displayAllCitiesWeather: " + routesData.getCity());
+        }
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        routesAdapter = new RoutesAdapter(routeData);
+        recyclerView.setAdapter(routesAdapter);
     }
 
 }

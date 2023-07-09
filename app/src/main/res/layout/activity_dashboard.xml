@@ -12,8 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:padding="20dp"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:padding="20dp">
 
         <RelativeLayout
             android:id="@+id/mainContainer"
@@ -33,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <EditText
+                    <AutoCompleteTextView
                         android:id="@+id/et_city"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -71,6 +71,17 @@
 
                 </TextView>
             </LinearLayout>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/LAVMainWeather"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/overviewContainer"
+                android:layout_below="@id/addressContainer"
+                android:layout_marginVertical="10dp"
+                app:lottie_autoPlay="true"
+                app:lottie_repeatCount="999999999"
+                app:lottie_loop="true" />
 
             <LinearLayout
                 android:id="@+id/overviewContainer"
@@ -468,9 +479,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
+        android:layout_marginHorizontal="20dp"
         android:layout_weight="12"
         android:text="@string/rpute"
-        android:layout_marginHorizontal="20dp"
         android:textAllCaps="false" />
 
     <FrameLayout
@@ -494,7 +505,6 @@
         android:id="@+id/errortext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:layout_gravity="center"
         android:text="@string/something_went_wrong"
         android:visibility="gone">

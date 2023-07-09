@@ -1,20 +1,22 @@
 package com.example.final30;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.example.final30.models.openweather.Logs;
 import com.example.final30.models.openweather.WeatherData;
@@ -30,7 +32,9 @@ import retrofit2.Response;
 
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener {
 
-    EditText etCity;
+    AutoCompleteTextView etCity;
+    private ArrayAdapter<String> adapter;
+    String[] cities;
     Button btnSearch, btnRoute;
     String city = "abbottabad";
     ApiCalls apiCalls;
@@ -42,11 +46,14 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     static String installationId;
     FrameLayout progressBar;
 
+    LottieAnimationView LAVMainWeather;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+
+        cities = getResources().getStringArray(R.array.pakistan_cities);
 
         etCity = findViewById(R.id.et_city);
         btnSearch = findViewById(R.id.btn_search);
@@ -72,6 +79,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         btnLogs.setOnClickListener(this);
         apiCalls = ApiClient.getRetrofit();
         progressBar = findViewById(R.id.loader);
+        LAVMainWeather = findViewById(R.id.LAVMainWeather);
 
         databaseReference = FirebaseDatabase.getInstance()
                 .getReference();
@@ -84,6 +92,17 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                         Log.d("Installations", "Installation ID: " + task.getResult());
                     } else Log.e("Installations", "Unable to get Installation ID");
                 });
+
+        // Create an ArrayAdapter with the suggestions
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, cities);
+
+        // Set the adapter on the AutoCompleteTextView
+        etCity.setAdapter(adapter);
+        etCity.setOnItemClickListener((parent, view, position, id) -> {
+            city = adapter.getItem(position).trim();
+            // Do something with the selected suggestion
+        });
+
     }
 
     @Override
@@ -144,6 +163,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                         weatherData.getWeather().get(0).getIcon() + "@2x.png")
                 .override(100, 100)
                 .into(ivWeatherIcon);
+        LAVMainWeather.setAnimation(Utils.getAnimAccordingToStatus(weatherData.getWeather().get(0).getMain()));
+        LAVMainWeather.playAnimation();
+        LAVMainWeather.setRepeatCount(9999999);
         tvTemp.setText(String.format("%s°C", Math.round(weatherData.getMain().getTemp())));
         tvMaxTemp.setText(String.format("Max Temp %s°C", Math.round(weatherData.getMain().getTempMax())));
         tvMinTemp.setText(String.format("Min Temp %s°C", Math.round(weatherData.getMain().getTempMin())));

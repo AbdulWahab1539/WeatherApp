@@ -25,6 +25,8 @@
     <string name="destination">Destination</string>
     <string name="origin">Origin</string>
     <string name="route_weather">Route Weather</string>
+    <string name="city">City</string>
+    <string name="_0c">0c</string>
 
     <string-array name="pakistan_cities">
         <item>Abbottabad</item>
@@ -63,6 +65,7 @@
         <item>Chak One Hundred Twenty Nine Left</item>
         <item>Chak Thirty-one -Eleven Left</item>
         <item>Chakwal</item>
+        <item>Chitral</item>
         <item>Chaman</item>
         <item>Charsadda</item>
         <item>Chawinda</item>
@@ -123,6 +126,7 @@
         <item>Jiwani</item>
         <item>Kabirwala</item>
         <item>Kadi</item>
+        <item>Kahna Nau</item>
         <item>Kahna Nau</item>
         <item>Kahuta</item>
         <item>Kalabagh</item>
@@ -198,12 +202,14 @@
         <item>Phalia</item>
         <item>Pind Dadan Khan</item>
         <item>Pindi Bhattian</item>
+        <item>Pindi Gheb</item>
         <item>Pir Mahal</item>
         <item>Quetta</item>
         <item>Rabwah</item>
         <item>Rahim Yar Khan</item>
         <item>Raiwind</item>
         <item>Rajanpur</item>
+        <item>Jand</item>
         <item>Ranipur</item>
         <item>Rawalakot</item>
         <item>Rawalpindi</item>
@@ -248,6 +254,7 @@
         <item>Uch Sharif</item>
         <item>Umarkot</item>
         <item>Upper Dir</item>
+<!--        <item>Dir</item>-->
         <item>Uthal</item>
         <item>Vehari</item>
         <item>Wah Cantonment</item>
