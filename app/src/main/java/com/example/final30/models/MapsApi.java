@@ -12,7 +12,7 @@ public interface MapsApi {
     String BASE_URL =" https://maps.googleapis.com/maps/api/directions/";
 
 //    origin=33.5614357,72.8780628&destination=34.1750613,73.2858989
-    @GET("json?&key=AIzaSyAgkbasawJgXgLaIAs838J7Rjd7JsE6FZE")
+    @GET("json?&key=")
     Call<Route> getRoute(@Query("origin") String origin, @Query("destination") String destination);
 
 }
